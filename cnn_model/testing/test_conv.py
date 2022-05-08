@@ -245,13 +245,13 @@ class MyTestCase(unittest.TestCase):
         np.testing.assert_allclose(padded_out, exp_out)
 
     def test_conv_forward(self):
-        conv = Convolution(filter_shape=(3, 3), stride=2, padding='same', pad=1)
+        conv = Convolution(num_filters=8, filter_shape=(3, 3), stride=2, padding='same', pad=1, initializer="random_normal")
         np.random.seed(1)
         A_prev = np.random.randn(2, 5, 7, 4)
-        W = np.random.randn(3, 3, 4, 8)
-        b = np.random.randn(1, 1, 1, 8)
+        # W = np.random.randn(3, 3, 4, 8)
+        # b = np.random.randn(1, 1, 1, 8)
 
-        out_layer = conv.forward_pass(A_prev, W, b)
+        out_layer = conv.forward_pass(A_prev)
         print(f"Z mean: {np.mean(out_layer)}")
         print("Z[0,2,1] =\n", out_layer[0, 2, 1])
         expected_out_layer = np.array([[[[-2.65112363, -0.37849177, -1.97054929, -1.96235299,
@@ -312,12 +312,10 @@ class MyTestCase(unittest.TestCase):
         np.testing.assert_allclose(out_layer, expected_out_layer)
 
     def test_conv_backward(self):
-        conv = Convolution(filter_shape=(2, 2), stride=2, padding='same', pad=2)
+        conv = Convolution(num_filters=8,filter_shape=(2, 2), stride=2, padding='same', pad=2, initializer="random_normal")
         np.random.seed(1)
         A_prev = np.random.randn(10, 4, 4, 3)
-        W = np.random.randn(2, 2, 3, 8)
-        b = np.random.randn(1, 1, 1, 8)
-        out_layer = conv.forward_pass(A_prev, W, b)
+        out_layer = conv.forward_pass(A_prev)
 
         dA = conv.backward_pass(out_layer)
         dW, db = conv.gradients["dW"], conv.gradients["db"]

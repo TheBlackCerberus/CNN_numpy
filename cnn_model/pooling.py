@@ -9,7 +9,7 @@ class Pooling:
         self.mode = mode
         self.cache = {}
 
-    def forward_pass(self, input_prev):
+    def forward_pass(self, input_prev, save_cache=True):
         (dim_train, dim_height_prev, dim_width_prev, dim_channels_prev) = input_prev.shape
         (f, f) = self.hparams["filter_shape"]
         stride = self.hparams["stride"]

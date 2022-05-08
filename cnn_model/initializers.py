@@ -7,7 +7,7 @@ def compute_fans(shape):
     return fan_in, fan_out
 
 
-def He_uniform(shape):
+def he_uniform(shape):
     fan_in, fan_out = compute_fans(shape)
     scale = np.sqrt(6. / fan_in)
     weight_shape = (fan_out, fan_in) if len(shape) == 2 else shape
@@ -17,7 +17,7 @@ def He_uniform(shape):
     return weight,bias
 
 
-def He_normal(shape):
+def he_normal(shape):
     fan_in, fan_out = compute_fans(shape)
     scale = np.sqrt(2. / fan_in)
     weight_shape = (fan_out, fan_in) if len(shape) == 2 else shape
@@ -27,7 +27,7 @@ def He_normal(shape):
     return weight, bias
 
 
-def Glorot_uniform(shape):
+def glorot_uniform(shape):
     fan_in, fan_out = compute_fans(shape)
     scale = np.sqrt(6. / (fan_in + fan_out))
     weight_shape = (fan_out, fan_in) if len(shape) == 2 else shape
@@ -37,7 +37,7 @@ def Glorot_uniform(shape):
     return weight, bias
 
 
-def Glorot_normal(shape):
+def glorot_normal(shape):
     fan_in, fan_out = compute_fans(shape)
     scale = np.sqrt(2. / (fan_in + fan_out))
     weight_shape = (fan_out, fan_in) if len(shape) == 2 else shape
@@ -45,3 +45,12 @@ def Glorot_normal(shape):
     weight = np.random.normal(loc=0.0,scale=scale,size=weight_shape)
     bias = np.random.uniform(low=-scale, high=scale, size=bias_shape)
     return weight, bias
+
+
+def random_normal():
+    # weight = np.random.randn(3, 3, 4, 8)
+    # bias = np.random.randn(1, 1, 1, 8)
+    weight = np.random.randn(2, 2, 3, 8)
+    bias = np.random.randn(1, 1, 1, 8)
+    return weight, bias
+
