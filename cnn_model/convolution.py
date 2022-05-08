@@ -32,7 +32,9 @@ class Convolution:
         return np.pad(input_layer, ((0,0),(pad,pad),(pad, pad),(0,0)), 'constant', constant_values=(0,0))
 
 
-    def forward_pass(self, out_activation, weights, biases):
+    def forward_pass(self, out_activation, save_cache=True):
+
+        if ""
 
         (dim_train, dim_height_prev, dim_width_prev, dim_channels_prev) = out_activation.shape
         (f, f, dim_channels_prev, dim_channels) = weights.shape
