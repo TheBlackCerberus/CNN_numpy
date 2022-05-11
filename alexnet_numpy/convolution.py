@@ -150,6 +150,10 @@ class Convolution:
         assert(dA_prev.shape == (dim_train, dim_height_prev, dim_height_prev, dim_channels_prev))
         return dA_prev
 
+    def apply_grads(self, learning_rate=0.001, l2_penalty=1e-4):
+        self.cache['W'] -= learning_rate * (self.gradients['dW'] + l2_penalty * self.cache['W'])
+        self.cache['b'] -= learning_rate * (self.gradients['db'] + l2_penalty * self.cache['b'])
+
 
 
 
